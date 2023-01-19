@@ -7,6 +7,10 @@ function easeInOutCubic(x) {
     return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 }
 
+function clip(val, min, max) {
+  return Math.min(Math.max(val, min), max);
+}
+
 // Main
 function aae() {
 
@@ -30,13 +34,12 @@ function aae() {
         this.time = time;
 
         for (var scene of this.scenes) {
-            if (scene.starttime <= time && time <= scene.starttime + scene.duration) {
-                scene.progress = (time - scene.starttime) / scene.duration;
+            scene.progress = (time - scene.starttime) / scene.duration;
+            scene.progress = clip(scene.progress, 0, 1);
 
-                easedProgress = scene.easing(scene.progress);
-                for (var key in scene.target) {
-                    scene.actor[key] = scene.copy[key] + easedProgress * (scene.target[key] - scene.copy[key]);
-                }
+            easedProgress = scene.easing(scene.progress);
+            for (var key in scene.target) {
+                scene.actor[key] = scene.copy[key] + easedProgress * (scene.target[key] - scene.copy[key]);
             }
         }
 
