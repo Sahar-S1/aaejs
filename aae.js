@@ -50,4 +50,17 @@ function aae() {
         return this.goto(this.time + dt);
     }
 
+    this.play = function(render) {
+        let lastTimestamp;
+        let tick = (timestamp) => {
+            if(lastTimestamp === undefined) lastTimestamp = timestamp;
+
+            this.step((timestamp - lastTimestamp) / 1000);
+            lastTimestamp = timestamp;
+
+            if(render !== undefined) render();
+            window.requestAnimationFrame(tick);
+        }
+        window.requestAnimationFrame(tick);
+    }
 }
