@@ -16,6 +16,12 @@ circle2 = {
     b: 255,
 };
 
+bg = {
+    r: 100,
+    g: 100,
+    b: 100
+};
+
 act = new aae()
     .addScene({
         actor: circle1,
@@ -43,6 +49,16 @@ act = new aae()
         duration: 2,
         starttime: 1,
         easing: (t) => easeInOutCubic(thereNBackNThere(t)),
+    })
+    .addScene({
+        actor: bg,
+        target: {
+            r: 255,
+            g: 255,
+            b: 255,
+        },
+        duration: 5,
+        starttime: 3,
     });
 
 function setup() {
@@ -51,7 +67,7 @@ function setup() {
 }
 
 function draw() {
-    background(220);
+    background(bg.r, bg.g, bg.b);
 
     fill(circle1.r, circle1.g, circle1.b);
     circle(circle1.x, circle1.y, circle1.d / 2);
