@@ -8,7 +8,21 @@ function easeInOutCubic(x) {
 }
 
 function clip(val, min, max) {
-  return Math.min(Math.max(val, min), max);
+    return Math.min(Math.max(val, min), max);
+}
+
+function map(vak, a, b, x, y) {
+    return x + (val - a) / (b - 1) * y;
+}
+
+function thereNBack(t) {
+    return (t <= 0.5) ? map(t, 0, 0.5, 0, 1) : map(t, 0.5, 1, 1, 0);
+}
+
+function thereNBackNThere(t) {
+    return (t <= 1/3) ? map(t, 0, 1/3, 0, 1) :
+            (1/3 <= t && t <= 2/3) ? map(t, 1/3, 2/3, 1, 0) :
+                map(t, 2/3, 1, 0, 1);
 }
 
 // Main

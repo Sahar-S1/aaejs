@@ -28,7 +28,7 @@ act = new aae()
         },
         duration: 2,
         starttime: 1,
-        easing: easeInOutCubic,
+        easing: (t) => easeInOutCubic(thereNBackNThere(t)),
     })
     .addScene({
         actor: circle2,
@@ -42,7 +42,7 @@ act = new aae()
         },
         duration: 2,
         starttime: 1,
-        easing: easeInOutCubic,
+        easing: (t) => easeInOutCubic(thereNBackNThere(t)),
     });
 
 function setup() {
@@ -59,5 +59,5 @@ function draw() {
     fill(circle2.r, circle2.g, circle2.b);
     circle(circle2.x, circle2.y, circle2.d / 2);
 
-    // act.step(1 / 60);
+    act.step(1 / 60);
 }
