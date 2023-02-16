@@ -65,10 +65,10 @@ act = new aae()
         target: {
             d: 50,
         },
-        duration: 4,
-        starttime: 5,
+        duration: 5,
+        starttime: 3,
+        easing: (t) => easeInOutCubic(thereNBack(t)),
         loop: true,
-        easing: thereNBack,
     });
 
 function setup() {

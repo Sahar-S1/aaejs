@@ -9,7 +9,7 @@ act2 = new aae()
       progress: 100
     },
     duration: 10,
-    starttime: 2
+    starttime: 2,
   });
 
 act2.play(() => {
