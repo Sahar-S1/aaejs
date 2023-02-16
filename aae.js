@@ -31,7 +31,7 @@ function aae() {
     this.time = 0;
     this.scenes = [];
 
-    this.addScene = function ({ actor, target, duration, starttime, easing }) {
+    this.addScene = function ({ actor, target, duration, starttime, easing, loop }) {
         this.scenes.push({
             actor: actor,
             copy: JSON.parse(JSON.stringify(actor)),
@@ -39,6 +39,7 @@ function aae() {
             duration: duration,
             starttime: starttime,
             easing: easing || linear,
+            loop: loop || false,
             progress: 0,
         });
         return this;
@@ -49,6 +50,9 @@ function aae() {
 
         for (var scene of this.scenes) {
             scene.progress = (time - scene.starttime) / scene.duration;
+            if(scene.loop && scene.progress > 1) {
+                scene.progress = scene.progress - Math.floor(scene.progress);
+            }
             scene.progress = clip(scene.progress, 0, 1);
 
             easedProgress = scene.easing(scene.progress);

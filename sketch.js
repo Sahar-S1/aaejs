@@ -59,6 +59,16 @@ act = new aae()
         },
         duration: 5,
         starttime: 3,
+    })
+    .addScene({
+        actor: circle1,
+        target: {
+            d: 50,
+        },
+        duration: 4,
+        starttime: 5,
+        loop: true,
+        easing: thereNBack,
     });
 
 function setup() {
