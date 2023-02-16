@@ -1,3 +1,12 @@
+// Utils
+function clip(val, min, max) {
+    return Math.min(Math.max(val, min), max);
+}
+
+function map(val, a, b, x, y) {
+    return x + (val - a) / (b - 1) * y;
+}
+
 // Easings
 function linear(t) {
     return t;
@@ -5,14 +14,6 @@ function linear(t) {
 
 function easeInOutCubic(x) {
     return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-}
-
-function clip(val, min, max) {
-    return Math.min(Math.max(val, min), max);
-}
-
-function map(val, a, b, x, y) {
-    return x + (val - a) / (b - 1) * y;
 }
 
 function thereNBack(t) {
