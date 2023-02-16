@@ -11,7 +11,7 @@ function clip(val, min, max) {
     return Math.min(Math.max(val, min), max);
 }
 
-function map(vak, a, b, x, y) {
+function map(val, a, b, x, y) {
     return x + (val - a) / (b - 1) * y;
 }
 
