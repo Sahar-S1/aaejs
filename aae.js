@@ -39,7 +39,7 @@ function aae() {
             duration: duration,
             starttime: starttime,
             easing: easing || linear,
-            progess: 0,
+            progress: 0,
         });
         return this;
     }
