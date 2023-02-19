@@ -21,9 +21,9 @@ function thereNBack(t) {
 }
 
 function thereNBackNThere(t) {
-    return (t <= 1/3) ? map(t, 0, 1/3, 0, 1) :
-            (1/3 <= t && t <= 2/3) ? map(t, 1/3, 2/3, 1, 0) :
-                map(t, 2/3, 1, 0, 1);
+    return (t <= 1 / 3) ? map(t, 0, 1 / 3, 0, 1) :
+        (1 / 3 <= t && t <= 2 / 3) ? map(t, 1 / 3, 2 / 3, 1, 0) :
+            map(t, 2 / 3, 1, 0, 1);
 }
 
 // Main
@@ -51,14 +51,27 @@ function aae() {
 
         for (var scene of this.scenes) {
             scene.progress = (time - scene.starttime) / scene.duration;
-            if(scene.loop && scene.progress > 1) {
+            if (scene.loop && scene.progress > 1) {
                 scene.progress = scene.progress - Math.floor(scene.progress);
             }
             scene.progress = clip(scene.progress, 0, 1);
 
             easedProgress = scene.easing(scene.progress);
-            for (var key in scene.target) {
-                scene.actor[key] = scene.copy[key] + easedProgress * (scene.target[key] - scene.copy[key]);
+
+            var queue = [{ actor: scene.actor, copy: scene.copy, target: scene.target, }];
+            while (queue.length != 0) {
+                var { actor, copy, target } = queue.shift();
+                for (var key in target) {
+                    if (typeof target[key] == "object") {
+                        queue.push({
+                            actor: actor[key],
+                            copy: copy[key],
+                            target: target[key],
+                        });
+                    } else {
+                        actor[key] = copy[key] + easedProgress * (target[key] - copy[key]);
+                    }
+                }
             }
         }
 
@@ -69,15 +82,15 @@ function aae() {
         return this.goto(this.time + dt);
     }
 
-    this.play = function(render) {
+    this.play = function (render) {
         let lastTimestamp;
         let tick = (timestamp) => {
-            if(lastTimestamp === undefined) lastTimestamp = timestamp;
+            if (lastTimestamp === undefined) lastTimestamp = timestamp;
 
             this.step((timestamp - lastTimestamp) / 1000);
             lastTimestamp = timestamp;
 
-            if(render !== undefined) render();
+            if (render !== undefined) render();
             window.requestAnimationFrame(tick);
         }
         window.requestAnimationFrame(tick);
