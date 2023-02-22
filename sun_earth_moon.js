@@ -48,6 +48,7 @@ function preload() {
         showorbits: true,
         freemove: true,
         framerate: 60,
+        playful: false,
     };
 
     textures = {
@@ -98,6 +99,27 @@ function preload() {
             loop: true,
         })
         ;
+
+    if (config.playful) act.addScene({
+        actor: config,
+        target: {
+            sun: {
+                radius: 10,
+            },
+            earth: {
+                radius: 20,
+                orbit_radius: 50,
+            },
+            moon: {
+                radius: 100,
+                orbit_radius: 100,
+            },
+        },
+        starttime: 0,
+        duration: 1,
+        easing: thereNBack,
+        loop: true,
+    });
 }
 
 function windowResized() {
@@ -108,11 +130,6 @@ function setup() {
     createCanvas(windowWidth, windowHeight * 0.75, WEBGL);
     frameRate(config.framerate);
     noStroke();
-    camera(
-        config.camera.position.x, config.camera.position.y, config.camera.position.z,
-        config.camera.center.x, config.camera.center.y, config.camera.center.z,
-        config.camera.up.x, config.camera.up.y, config.camera.up.z
-    );
 }
 
 function draw() {
