@@ -154,7 +154,7 @@ function draw() {
     push();
     if (config.showorbits) {
         strokeWeight(0.5);
-        stroke(55);
+        stroke(155);
         noFill();
         ellipse(0, 0, config.earth.orbit_radius * 2);
     }
@@ -178,7 +178,7 @@ function draw() {
     push();
     if (config.showorbits) {
         strokeWeight(0.5);
-        stroke(55);
+        stroke(155);
         noFill();
         ellipse(0, 0, config.moon.orbit_radius * 2);
     }
